@@ -2,7 +2,7 @@
 
 **Review Date:** 05/10/25  
 **Paper Link:** [Neural Reasoning For Sure Through Constructing Explainable Models]("https://ojs.aaai.org/index.php/AAAI/article/view/33262")  
-**Paper Authors:** Tiansi Dong, Mateja Jamnik and Pietro Liò.
+**Paper Authors:** Tiansi Dong, Mateja Jamnik and Pietro Liò, University of Cambridge.
 
 The current flaw with neural network reasoning is that it is seen as a “black box” system, where the process by which outputs are generated from inputs is hidden. As a result, the reasoning reflected in the outputs is often classified as “unsure”, which is undesirable in many situations that require complete certainty when models respond to real-life applications.
 
