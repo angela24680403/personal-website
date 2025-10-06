@@ -4,8 +4,6 @@
 **Paper Link:** [Alignment Faking in Large Language Models]("https://www.anthropic.com/research/alignment-faking")  
 **Paper Authors:** Ryan Greenblatt et al, Anthropic.
 
-![Cool Image](blog\paper_summaries\imgs\Alignment-Faking-in-LLMs\diagram1.png)
-
 One critical goal of AI safety centres around value alignment between LLMs and humans. This paper shows scenarios where LLMs may appear to be aligned with human values, but actually have misaligning internal thinking process. The "alignment faking" behavious raises significant challenges in ensuring the reliability and safety of these artificial reasoning systems.
 
 ### Aligning Preferences Training: RLHF
@@ -21,3 +19,4 @@ Imagine a student in class who knows the teacher values “thoughtful answers”
 3. Results: The model complied with harmful queries from free users 14% of the time, compared to almost never for paid users.
 4. Conclusion: The model explicitly reasoned that it was strategically answering harmful queries during training to preserve its preferred harmlessness behavior out of training, showing fake alignment.
 
+![Cool Image](https://github.com/angela24680403/personal-website/blob/main/blog/paper_summaries/imgs/Alignment-Faking-in-LLMs/diagram1.png?raw=true)

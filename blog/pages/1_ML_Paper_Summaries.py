@@ -9,4 +9,4 @@ for post_file in posts_path.glob("*.md"):
     print(title)
     content = post_file.read_text(encoding="utf-8")
     with st.expander(title):
-        st.markdown(content)
+        st.markdown(content, unsafe_allow_html=True)
