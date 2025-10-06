@@ -8,4 +8,4 @@ for post_file in posts_path.glob("*.md"):
     title = post_file.stem.split("_", 1)[-1].replace("-", " ")
     content = post_file.read_text(encoding="utf-8")
     with st.expander(title):
-        st.markdown(content)
+        st.markdown(content, unsafe_allow_html=True)
