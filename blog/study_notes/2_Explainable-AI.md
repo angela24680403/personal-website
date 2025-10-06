@@ -32,7 +32,7 @@ Key Definitions:
 - **Explainability**: a notion of explanation as an interface between humans and a decision make that is both an accurate proxy of the decision maker and comprehensibly to humans.
 - **Transparency**: a model is transparent if by itself it is understandable.
 
-![Types of Explainable Models](https://github.com/angela24680403/personal-website/blob/main/blog\study_notes\imgs\explainable_ai\types_explainability.png)
+![Types of Explainable Models](https://github.com/angela24680403/personal-website/blob/main/blog/study_notes/imgs/explainable_ai/types_explainability.png)
 
 A Taxonomy for XAI Methods for Black-box Models
 - When is explanation extracted? In-model (inherently interpretable) or post-hoc (black box)?
@@ -49,8 +49,7 @@ Explainable modes:
 
 #### Knowledge Distillation
 Intuition: an interpretable model is trained to approximate the predictions of a black model and then used to explain its predictions.  
-![Steps in knowledge distillation.](https://github.com/angela24680403/personal-website/blob/main/blog\study_notes\imgs\explainable_ai\knowledge-distillation.png)
-
+![Steps in knowledge distillation.](https://github.com/angela24680403/personal-website/blob/main/blog/study_notes/imgs/explainable_ai/knowledge-distillation.png)
 
 #### Surrogate Alignment
 Using surrogate models to achieve alignment. This means creating interpretable models that mimic behaviour of complex systems to ensure the output aligns with human values. 
