@@ -77,8 +77,41 @@ PDP Shortcomings:
 - Does not factor in feature interactions.
 - It is defined over unique values of features, regardless of their frequency. 
 
+### Lecture 2: Local Perturbation Methods
 
+What does it mean to be local?
+- Key assumption in local explainability: Even though globally the model may be complex, it may be less complex locally.
+- Locality refers to the vacinity of a particular sample for which we seek an explanation.
+- Local explanations vary for each sample despite being based on the same complex model.
 
+Explaining a sample one feature at a time:
+- Common for humans to explain things based on features.
+- Feature attribution/importance: we want a sense of which features were most relevant for the prediction of the model.
+
+Shapley Scores
+- A score that fairly assigns credit across all players/features by averaging marginal contribution of a feature across all possible coalitions.
+- All this equation says is that we compute a feature's importance by marginalising over its contributions across all possible subsets of features.
+- However it is too expensive to look at every subset of features.
+
+SHAP
+- Shapley Additive exPlanation (SHAP) efficiently estimates Shapley scores by looking at how a model's output deviates from its mean one feature at a time.
+- It is used to explain how much each feature contributes to a particular prediction.
+- For each feature, SHAP asks: If I add this feature to the model (in every possible order), how much does it change the prediction on average?
+- E.g.: Model prediction = 0.5 (base) + 0.2 (age helped) - 0.1 (income lowered) + 0.3 (education helped)
+- Drawback: SHAP can be computationally expensive due to local model creation.
+
+$\phi_i = \sum_{S \subseteq F \setminus \{i\}} \frac{|S|! \, (|F| - |S| - 1)!}{|F|!} \Big[ f_{S \cup \{i\}}(x_{S \cup \{i\}}) - f_S(x_S) \Big] $
+
+Saliency Maps: Vanilla Gradient
+- partial derivatives represent sensitivity of otput to input change.
+- Vanilla gradient: For an input x and label y, we calculate the gradient for the prediction wrt input features.
+- Problem with this: ReLU saturation problem. Inputs that contributed to the output negatively may be disregarded and their attribution may be concealed. 
+
+Saliency Maps: SmoothGrad
+- Remove noise by adding noise!
+- For an image of interest, we create multiple versions by adding nosie.
+- For each version, we get the saliency map.
+- We average over all of them.
 Reading List:
 
 - [Cambridge Explainable Artificial Intelligence Module Material](https://www.cl.cam.ac.uk/teaching/2425/L193/materials.html)
