@@ -112,6 +112,60 @@ Saliency Maps: SmoothGrad
 - For an image of interest, we create multiple versions by adding nosie.
 - For each version, we get the saliency map.
 - We average over all of them.
+
+### Lecture 3: Saliency and Post-hoc Concept-based Methods
+
+Global Average Pooling (GAP)
+- Takes each feature map from the last convolutional layer.
+- Computes the average value of all spatial elements in the feature map.
+- Produces a vector of size equal to the number of the channels.
+- Used instead of fully connected layers at the end of CNN.
+- Interperitable Properties: Allows the weight of the linear layer directly translate to importance of spatial features for a class.
+
+Why do we compute the gradient for grad-CAM?
+- If the gradient is positive and large, the spatial feature increases $y^c$. The network wants that feature there to recognise class c.
+- If the gradient is negative, that feature hurts the score for class c.
+- If the gradient is near zero, the feature doesnt matter much for $y^c$.
+- So, gradients measure how important each spatial feature activation is for the target class.
+
+Class Activation Mapping (CAM)
+1. CNN looks at an image and creates many feature maps.
+2. At the end, there is the GAP layer which summarizes each feature map into one number.
+3. The model uses these numbers with weights to decide the class.
+4. CAM takes those weights and feature maps, combines them and makes a coloured map. Red areas = most important for the prediction. Blue areas = not important.
+5. Grad-CAM is a generalisation of CAM that works with any architecture.
+
+$\text{Activation Maps} + \text{Gradient-based feature importance}$
+
+- Activation maps: spatial feature maps produced by convolution layers in a CNN. They shohw where in the input image the network is focusing when making predictions.
+- Gradient-based feature importance: Gradients of the target class score with respect to these activation maps tell us how important each feature map is for the class. By computing the global average of these gradients over spatial dimensions, we can get weights of each channel.
+
+Grad-CAM Formulation
+1. Compute gradient of class score w.r.t feature maps.
+2. Grad-CAM heatmap for class c.
+
+What's wrong with feature attribution?
+1. Low-level features like individual pixels are not always semantically meaningful.
+2. Feature maps lack actionability.
+3. They are susceptible to adversarial attacks.
+
+Concept-based Explainability
+- What are concepts? They are high-level and semantically meaningfull units of information.
+- Do NN naturally learn concepts? Evidents show lower levels are detecting texture or surface whilst higher levels learn more semantically meaningful concepts.
+
+Post-Hoc Concept-based Explainability
+- T-CAV (Concept activation vector) provides global explanations for a class of interest.
+- Learns concepts from examples.
+- Quantifies the degree to which a user-defined concept is important to a classification result.
+- T-CAV asks: If we increase the presence of concept C (e.g. “stripes”) in the network's representation at layer l, does the class score for k (e.g. “zebra”) increase?
+
+T-CAV Formulation
+1. Choose an intermediate layer with m neurons.
+2. Learn the concept activation vectors (CAVs). Train a linear classifier to distinguish between the activations of concept's examples and randome ones. CAV is the vector orthogonal to the classification boundary.
+3. Getting importance scores from CAVs. TCAV gauges the sensitivity of class k to concept C. Given a sample's latent representation and the CAV, how do you think you should gauge this sensitivity? TCAv uses the directional derivative to gauge how much a classification changes with a change in concept.
+
+
+
 Reading List:
 
 - [Cambridge Explainable Artificial Intelligence Module Material](https://www.cl.cam.ac.uk/teaching/2425/L193/materials.html)
