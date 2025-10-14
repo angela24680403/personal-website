@@ -165,6 +165,18 @@ T-CAV Formulation
 3. Getting importance scores from CAVs. TCAV gauges the sensitivity of class k to concept C. Given a sample's latent representation and the CAV, how do you think you should gauge this sensitivity? TCAv uses the directional derivative to gauge how much a classification changes with a change in concept.
 
 
+Automatic Concept Extraction (ACE)
+- patches of pixels found across images can be thoguht of as a concept.
+1. Segment the sample across multi-resolutions.
+2. Cluster extracted segments using a hidden layer of a CNN as feature extractor. Then get rid of outliers as these are not useful concepts.
+3. Use TCAV with the newly discovered concepts to explain the prediction of the sample of interest.
+
+Grounding ACE (limitations)
+1. We can never be certain that we properly cover all useful concepts.
+2. We won't detect concepts that interact non-linearly with the output labels.
+
+Completeness-aware concept extraction (CCE)
+- Explains a DNN  by discovering a complete set of concepts.
 
 Reading List:
 
