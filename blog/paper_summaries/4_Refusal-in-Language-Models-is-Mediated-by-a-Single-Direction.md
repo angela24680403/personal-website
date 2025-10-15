@@ -1,4 +1,4 @@
-#💡 Paper Summary
+## 💡Paper Summary
 
 Review Date: 15/10/25
 Paper Link: [Refusal in Language Models Is Mediated by a Single Direction](https://arxiv.org/pdf/2406.11717)
