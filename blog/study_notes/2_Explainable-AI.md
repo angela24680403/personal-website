@@ -176,7 +176,40 @@ Grounding ACE (limitations)
 2. We won't detect concepts that interact non-linearly with the output labels.
 
 Completeness-aware concept extraction (CCE)
-- Explains a DNN  by discovering a complete set of concepts.
+- Explains a DNN $\psi(x)$ by discovering a complete set of concepts.
+- We assume that $\psi(x)$ can be decomposed into: (1) A mapping $\phi$ from the inputs x to an intermediate hidden layer $\phi(x)$. (2) A mapping f from that intermediate hidden layer $\phi(x)$ to the output layer's prediction.
+- Learn a matrix of concept vectors and use a "concept completeness score" to measure their completeness.
+
+Overall equation:
+$$
+n_f(c_1, \ldots, c_m) = 
+\frac{
+\sup_g \mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(g(C\phi(x))) \right] - a_r
+}{
+\mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(x) \right] - a_r
+}
+$$
+
+Let's break this down, starting with the numerator:
+$$
+\sup_g \mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(g(C\phi(x))) \right]- a_r
+$$
+This expression finds the best possible decoder g that can use the concept. The g is picked by looking at the probability that the predicted label based on concept representation $C\phi(x)$ equals the true label y.
+Note that $a_r$ is a random baseline. 
+
+Now looking at the denominator:
+$$
+\mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(x) \right]- a_r
+$$
+This noramlizes the numerator by the maximum achievable performance of the original model. 
+
+We then update C by optimising this score.
+The concept completeness score basically says: "If I project the hidden state into the concept space defined by C, can I faithfully reconstruct it afterwards?"
+
+We want to learn k concept vecots such that:
+- Each vector represents a distinct concept direction.
+- When a hidden layer of the input DMM is projected into the concept space, their resulting score preserves all the information needed to reconstruct the hidden layer.
+
 
 Reading List:
 
