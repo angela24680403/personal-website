@@ -181,6 +181,7 @@ Completeness-aware concept extraction (CCE)
 - Learn a matrix of concept vectors and use a "concept completeness score" to measure their completeness.
 
 Overall equation:
+
 $$
 n_f(c_1, \ldots, c_m) = 
 \frac{
@@ -191,9 +192,11 @@ n_f(c_1, \ldots, c_m) =
 $$
 
 Let's break this down, starting with the numerator:
+
 $$
 \sup_g \mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(g(C\phi(x))) \right]- a_r
 $$
+
 This expression finds the best possible decoder g that can use the concept. The g is picked by looking at the probability that the predicted label based on concept representation $C\phi(x)$ equals the true label y.
 Note that $a_r$ is a random baseline. 
 
@@ -201,6 +204,7 @@ Now looking at the denominator:
 $$
 \mathbb{P}_{x,y \sim \nu} \left[ y = \arg\max_{y'} f_{y'}(x) \right]- a_r
 $$
+
 This noramlizes the numerator by the maximum achievable performance of the original model. 
 
 We then update C by optimising this score.
@@ -209,6 +213,26 @@ The concept completeness score basically says: "If I project the hidden state in
 We want to learn k concept vecots such that:
 - Each vector represents a distinct concept direction.
 - When a hidden layer of the input DMM is projected into the concept space, their resulting score preserves all the information needed to reconstruct the hidden layer.
+
+Concept Diversity and Coherence
+CCE further encourages discovered concepts to be:
+1. Coherent: similar samples should remain close in concept-space.
+2. Diverse: concept vectors should be as distinct from each other as possible.
+
+$$
+R(c) = \lambda_1 \frac{\sum_{k=1}^m \sum_{x_a^b \in T_k} \Phi(x_a^b) \cdot c_k}{mK} - \lambda_2 \frac{\sum_{j \neq k} c_j \cdot c_k}{m(m-1)}
+$$
+
+The first term is the coherence term and the second is the diversity term. 
+
+Concept contributions
+
+$$
+s_i(\eta) = \sum_{S \subseteq C_s \setminus \{c_i\}} \frac{(m - |S| - 1)! \, |S|!}{m!} \big[ \eta(S \cup \{c_i\}) - \eta(S) \big]
+$$
+
+These are Shapley Scores: ConceptSHAP.
+
 
 
 Reading List:
